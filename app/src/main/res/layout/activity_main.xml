@@ -16,4 +16,57 @@ android:orientation="vertical">
         android:paddingLeft="10dp"
         android:gravity="center_vertical"/>
 
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/startLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="タップしてスタート"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/enemy_ship"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/enemy_ship"/>
+
+        <ImageView
+            android:id="@+id/ship"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ship"/>
+
+        <ImageView
+            android:id="@+id/blueball"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/blueball"/>
+
+        <ImageView
+            android:id="@+id/greenball"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/greenball"/>
+
+        <ImageView
+            android:id="@+id/redball"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/redball"/>
+
+        <ImageView
+            android:id="@+id/yellowball"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/yellowball"/>
+
+    </FrameLayout>
+
 </LinearLayout>
