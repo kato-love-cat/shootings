@@ -30,20 +30,6 @@ android:orientation="vertical">
             android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/enemy_ship"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/enemy_ship"/>
-
-        <ImageView
-            android:id="@+id/ship"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ship"/>
-
-        <ImageView
             android:id="@+id/blueball"
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -66,6 +52,20 @@ android:orientation="vertical">
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/yellowball"/>
+
+        <ImageView
+            android:id="@+id/enemy_ship"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_gravity="center|top"
+            android:src="@drawable/enemy_ship"/>
+
+        <ImageView
+            android:id="@+id/ship"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center|bottom"
+            android:src="@drawable/ship" />
 
     </FrameLayout>
 
