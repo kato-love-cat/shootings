@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity"
-android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/scoreLabel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Score 300"
-        android:textSize="18sp"
+        android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:gravity="center_vertical"/>
+        android:text="Score 300"
+        android:textSize="18sp" />
 
     <FrameLayout
         android:id="@+id/frame"
@@ -33,32 +33,32 @@ android:orientation="vertical">
             android:id="@+id/blueball"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/blueball"/>
+            android:src="@drawable/blueball" />
 
         <ImageView
             android:id="@+id/greenball"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/greenball"/>
+            android:src="@drawable/greenball" />
 
         <ImageView
             android:id="@+id/redball"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/redball"/>
+            android:src="@drawable/redball" />
 
         <ImageView
             android:id="@+id/yellowball"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/yellowball"/>
+            android:src="@drawable/yellowball" />
 
         <ImageView
             android:id="@+id/enemy_ship"
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:layout_gravity="center|top"
-            android:src="@drawable/enemy_ship"/>
+            android:src="@drawable/enemy_ship" />
 
         <ImageView
             android:id="@+id/ship"
