@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -29,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private int screenWidth;
     private int screenHeight;
 
+    private float shipX;
     private float shipY;
+    private float enemy_shipX;
     private float enemy_shipY;
     private float blueballX;
     private float blueballY;
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
     private Timer timer = new Timer();
+
+    private boolean action_flg = false;
+    private boolean start_flg = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,26 +80,24 @@ public class MainActivity extends AppCompatActivity {
         yellowball.setX(-80.0f);
         yellowball.setY(-80.0f);
 
-        startLabel.setVisibility(View.INVISIBLE);
-        shipY = 500.0f;
+        shipX = 450.0f;
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        changePos();
-                    }
-                });
-            }
-        }, 0, 20);
     }
 
     public void changePos() {
 
+        // ship
+        if (action_flg) {
+            shipX -= 20;
+
+        } else {
+            shipX += 20;
+        }
+        ship.setX(shipX);
+
+
         // blueball
-        blueballY += 20;
+        blueballY += 10;
         if (blueballY > screenHeight) {
             blueballY = -80.0f;
             blueballX = (float)Math.floor(Math.random() * (screenWidth - blueball.getWidth()));
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         blueball.setY(blueballY);
 
         // greenball
-        greenballY += 20;
+        greenballY += 10;
         if (greenballY > screenHeight) {
             greenballY = -80.0f;
             greenballX = (float)Math.floor(Math.random() * (screenWidth - greenball.getWidth()));
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         greenball.setY(greenballY);
 
         // redball
-        redballY += 40;
+        redballY += 9;
         if (redballY > screenHeight) {
             redballY = -80.0f;
             redballX = (float)Math.floor(Math.random() * (screenWidth - redball.getWidth()));
@@ -120,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         redball.setY(redballY);
 
         // yellowball
-        yellowballY += 30;
+        yellowballY += 8;
         if (yellowballY > screenHeight) {
             yellowballY = -80.0f;
             yellowballX = (float)Math.floor(Math.random() * (screenWidth - yellowball.getWidth()));
@@ -130,4 +134,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (start_flg == false) {
+
+            start_flg = true;
+            startLabel.setVisibility(View.GONE);
+
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            changePos();
+                        }
+                    });
+                }
+            }, 0, 20);
+
+        } else {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                action_flg = true;
+
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                action_flg = false;
+
+            }
+        }
+        return true;
+    }
 }
