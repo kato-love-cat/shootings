@@ -92,6 +92,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void changePos() {
 
+        // blueball
+        blueballY += 20;
+        if (blueballY > screenHeight) {
+            blueballY = -80.0f;
+            blueballX = (float)Math.floor(Math.random() * (screenWidth - blueball.getWidth()));
+        }
+        blueball.setX(blueballX);
+        blueball.setY(blueballY);
+
         // greenball
         greenballY += 20;
         if (greenballY > screenHeight) {
