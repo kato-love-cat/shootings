@@ -9,6 +9,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ship;
 
     private int frameHeight;
+    private int framewidth;
     private int screenWidth;
     private int screenHeight;
+    private int shipSize;
 
     private float shipX;
     private float shipY;
@@ -80,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         yellowball.setX(-80.0f);
         yellowball.setY(-80.0f);
 
-        shipX = 450.0f;
-
     }
 
     public void changePos() {
@@ -93,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             shipX += 20;
         }
+
+        if (shipX < 0) shipX = 0;
+
+        if (shipX > framewidth - shipSize) shipX = framewidth -shipSize;
+
         ship.setX(shipX);
 
 
@@ -139,6 +145,14 @@ public class MainActivity extends AppCompatActivity {
         if (start_flg == false) {
 
             start_flg = true;
+
+            FrameLayout frame = findViewById(R.id.frame);
+            framewidth = frame.getWidth();
+
+            shipX = ship.getX();
+            shipSize = ship.getWidth();
+
+
             startLabel.setVisibility(View.GONE);
 
             timer.schedule(new TimerTask() {
