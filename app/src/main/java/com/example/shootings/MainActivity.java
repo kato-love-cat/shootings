@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private float redballY;
     private float yellowballX;
     private float yellowballY;
+    private float shipWidth;
 
     private Handler handler = new Handler();
     private Timer timer = new Timer();
@@ -97,42 +98,42 @@ public class MainActivity extends AppCompatActivity {
 
         if (shipX < 0) shipX = 0;
 
-        if (shipX > framewidth - shipSize) shipX = framewidth -shipSize;
+        if (shipX > framewidth - shipSize) shipX = framewidth - shipSize;
 
         ship.setX(shipX);
 
 
-        // blueball
-        blueballY += 10;
-        if (blueballY > screenHeight) {
-            blueballY = -80.0f;
-            blueballX = (float)Math.floor(Math.random() * (screenWidth - blueball.getWidth()));
+        // blueball（自機）
+        blueballY -= 30;
+        if (blueballY < 0) {
+            blueballY = screenHeight - ship.getHeight();
+            blueballX = shipX;
         }
         blueball.setX(blueballX);
         blueball.setY(blueballY);
 
-        // greenball
-        greenballY += 10;
+        // greenball（敵機）
+        greenballY += 15;
         if (greenballY > screenHeight) {
-            greenballY = -80.0f;
+            greenballY = 0 - 20;
             greenballX = (float)Math.floor(Math.random() * (screenWidth - greenball.getWidth()));
         }
         greenball.setX(greenballX);
         greenball.setY(greenballY);
 
-        // redball
-        redballY += 9;
+        // redball（敵機）
+        redballY += 13;
         if (redballY > screenHeight) {
-            redballY = -80.0f;
+            redballY = 0 - 20;
             redballX = (float)Math.floor(Math.random() * (screenWidth - redball.getWidth()));
         }
         redball.setX(redballX);
         redball.setY(redballY);
 
-        // yellowball
-        yellowballY += 8;
+        // yellowball（敵機）
+        yellowballY += 11;
         if (yellowballY > screenHeight) {
-            yellowballY = -80.0f;
+            yellowballY = 0 - 20;
             yellowballX = (float)Math.floor(Math.random() * (screenWidth - yellowball.getWidth()));
         }
         yellowball.setX(yellowballX);
@@ -151,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
             shipX = ship.getX();
             shipSize = ship.getWidth();
+
+
 
 
             startLabel.setVisibility(View.GONE);
