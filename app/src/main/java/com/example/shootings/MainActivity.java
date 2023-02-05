@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView greenball;
     private ImageView redball;
     private ImageView yellowball;
+    private ImageView purpleball;
     private ImageView enemy_ship;
     private ImageView ship;
 
@@ -45,7 +46,13 @@ public class MainActivity extends AppCompatActivity {
     private float redballY;
     private float yellowballX;
     private float yellowballY;
-    private float shipWidth;
+    private float purpleballX;
+    private float purpleballY;
+    //private int shipWidth;
+    private int shipHeight;
+    private int enemy_shipHeight;
+    private int scoreLabelHeight;
+    private int score = 0;
 
     private Handler handler = new Handler();
     private Timer timer = new Timer();
@@ -66,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         greenball = findViewById(R.id.greenball);
         redball = findViewById(R.id.redball);
         yellowball = findViewById(R.id.yellowball);
+        purpleball = findViewById(R.id.purpleball);
 
         // Screen Size
         WindowManager wm = getWindowManager();
@@ -83,10 +91,16 @@ public class MainActivity extends AppCompatActivity {
         redball.setY(-80.0f);
         yellowball.setX(-80.0f);
         yellowball.setY(-80.0f);
+        purpleball.setX(-80.0f);
+        purpleball.setY(-80.0f);
+
+        scoreLabel.setText("Score : 0 ");
 
     }
 
     public void changePos() {
+
+        hitCheck();
 
         // ship
         if (action_flg) {
@@ -113,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         blueball.setY(blueballY);
 
         // greenball（敵機）
-        greenballY += 15;
+        greenballY += 10;
         if (greenballY > screenHeight) {
             greenballY = 0 - 20;
             greenballX = (float)Math.floor(Math.random() * (screenWidth - greenball.getWidth()));
@@ -122,22 +136,95 @@ public class MainActivity extends AppCompatActivity {
         greenball.setY(greenballY);
 
         // redball（敵機）
-        redballY += 13;
+        redballY += 12;
         if (redballY > screenHeight) {
-            redballY = 0 - 20;
+            redballY = -80.0f;
             redballX = (float)Math.floor(Math.random() * (screenWidth - redball.getWidth()));
         }
         redball.setX(redballX);
         redball.setY(redballY);
 
         // yellowball（敵機）
-        yellowballY += 11;
+        yellowballY += 14;
         if (yellowballY > screenHeight) {
-            yellowballY = 0 - 20;
+            yellowballY = -80.0f;
             yellowballX = (float)Math.floor(Math.random() * (screenWidth - yellowball.getWidth()));
         }
         yellowball.setX(yellowballX);
         yellowball.setY(yellowballY);
+
+        // purpleball（敵機）
+        purpleballY += 16;
+        if (purpleballY > screenHeight) {
+            purpleballY = -80.0f;
+            purpleballX = (float)Math.floor(Math.random() * (screenWidth - purpleball.getWidth()));
+        }
+        purpleball.setX(purpleballX);
+        purpleball.setY(purpleballY);
+
+        scoreLabel.setText("Score : " + score);
+
+    }
+
+    public void hitCheck() {
+
+        shipHeight = ship.getHeight();
+        enemy_shipHeight = enemy_ship.getHeight();
+        scoreLabelHeight = scoreLabel.getHeight();
+
+        // blueball（自機）
+        float blueballCenterX = blueballX + blueball.getWidth() / 2;
+        float blueballCenterY = blueballY + blueball.getHeight() / 2;
+
+        if ( enemy_shipHeight - 10<= blueballCenterY && blueballCenterY <= enemy_shipHeight ) {
+
+            //blueballY += enemy_shipHeight - shipHeight;
+            score += 30;
+        }
+
+        // greenball（敵機）
+        float greenballCenterX = greenballX + greenball.getWidth() / 2;
+        float greenballCenterY = greenballY + greenball.getHeight() / 2;
+
+        if ( screenHeight - shipHeight <= greenballCenterY && greenballCenterY <= screenHeight &&
+            shipX <= greenballCenterX && greenballCenterX <= shipX +shipSize) {
+
+            greenballX -= 1000;
+            score -= 5;
+        }
+
+        // redball（敵機）
+        float redballCenterX = redballX + redball.getWidth() / 2;
+        float redballCenterY = redballY + redball.getHeight() / 2;
+
+        if ( screenHeight - shipHeight <= redballCenterY && redballCenterY <= screenHeight &&
+                shipX <= redballCenterX && redballCenterX <= shipX +shipSize) {
+
+            redballX -= 1000;
+            score -= 10;
+        }
+
+        // yellowball（敵機）
+        float yellowballCenterX = yellowballX + yellowball.getWidth() / 2;
+        float yellowballCenterY = yellowballY + yellowball.getHeight() / 2;
+
+        if ( screenHeight - shipHeight <= yellowballCenterY && yellowballCenterY <= screenHeight &&
+                shipX <= yellowballCenterX && yellowballCenterX <= shipX +shipSize) {
+
+            yellowballX -= 1000;
+            score -= 15;
+        }
+
+        // purpleball（敵機）
+        float purpleballCenterX = purpleballX + purpleball.getWidth() / 2;
+        float purpleballCenterY = purpleballY + purpleball.getHeight() / 2;
+
+        if ( screenHeight - shipHeight <= purpleballCenterY && purpleballCenterY <= screenHeight &&
+                shipX <= purpleballCenterX && purpleballCenterX <= shipX +shipSize) {
+
+            purpleballX -= 1000;
+            score -= 20;
+        }
 
     }
 

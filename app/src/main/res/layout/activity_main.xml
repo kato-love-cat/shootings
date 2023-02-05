@@ -54,18 +54,6 @@
             android:src="@drawable/yellowball" />
 
         <ImageView
-            android:id="@+id/orangeball"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/orange" />
-
-        <ImageView
-            android:id="@+id/pinkball"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/pink" />
-
-        <ImageView
             android:id="@+id/purpleball"
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -76,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:layout_gravity="center|top"
+            android:alpha="0.25"
             android:src="@drawable/enemy_ship" />
 
         <ImageView
@@ -83,6 +72,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center|bottom"
+            android:alpha="0.25"
             android:src="@drawable/ship" />
 
     </FrameLayout>
