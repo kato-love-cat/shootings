@@ -2,6 +2,7 @@ package com.example.shootings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         if ( enemy_shipHeight - 10<= blueballCenterY && blueballCenterY <= enemy_shipHeight ) {
 
             //blueballY += enemy_shipHeight - shipHeight;
-            score += 30;
+            score += 20;
         }
 
         // greenball（敵機）
@@ -222,11 +223,23 @@ public class MainActivity extends AppCompatActivity {
         if ( screenHeight - shipHeight <= purpleballCenterY && purpleballCenterY <= screenHeight &&
                 shipX <= purpleballCenterX && purpleballCenterX <= shipX +shipSize) {
 
-            purpleballX -= 1000;
-            score -= 20;
+        //    purpleballX -= 1000;
+        //    score -= 20;
+
+
+        // Game Over!
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
         }
 
+        // 結果画面へ
+        Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+        intent.putExtra("SCORE", score);
+        startActivity(intent);
+        }
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
