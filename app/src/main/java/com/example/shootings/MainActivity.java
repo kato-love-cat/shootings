@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private int enemy_shipHeight;
     private int scoreLabelHeight;
     private int score = 0;
+    private int ship_health = 30;
+    private int enemyship_health = 50;
 
     private Handler handler = new Handler();
     private Timer timer = new Timer();
@@ -181,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
             //blueballY += enemy_shipHeight - shipHeight;
             score += 20;
+            enemyship_health -= 10;
         }
 
         // greenball（敵機）
@@ -192,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
             greenballX -= 1000;
             score -= 5;
+            ship_health -= 10;
         }
 
         // redball（敵機）
@@ -203,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
             redballX -= 1000;
             score -= 10;
+            ship_health -= 10;
         }
 
         // yellowball（敵機）
@@ -214,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
             yellowballX -= 1000;
             score -= 15;
+            ship_health -= 10;
         }
 
         // purpleball（敵機）
@@ -225,19 +231,35 @@ public class MainActivity extends AppCompatActivity {
 
         //    purpleballX -= 1000;
         //    score -= 20;
+        //    ship_health -= 10;
 
 
         // Game Over!
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
+        //if (timer != null) {
+        //    timer.cancel();
+        //    timer = null;
+        //}
 
         // 結果画面へ
-        Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-        intent.putExtra("SCORE", score);
-        startActivity(intent);
+        //Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+        //intent.putExtra("SCORE", score);
+        //startActivity(intent);
         }
+
+        if ( ship_health == 0) {
+
+            // Game Over!
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+
+            // 結果画面へ
+            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            intent.putExtra("SCORE", score);
+            startActivity(intent);
+        }
+
     }
 
 
