@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private int enemy_shipHeight;
     private int scoreLabelHeight;
     private int score = 0;
-    private int ship_health = 30;
-    private int enemyship_health = 50;
+    private int ship_health = 250;
+    private int enemyship_health = 500;
 
     private Handler handler = new Handler();
     private Timer timer = new Timer();
@@ -246,7 +246,8 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(intent);
         }
 
-        if ( ship_health == 0) {
+        //ゲーム終了判定
+        if ( ship_health < 0 ) {
 
             // Game Over!
             if (timer != null) {
@@ -256,6 +257,19 @@ public class MainActivity extends AppCompatActivity {
 
             // 結果画面へ
             Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            intent.putExtra("SCORE", score);
+            startActivity(intent);
+
+        } else if( enemyship_health < 0 ) {
+
+            // Game Over!
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+
+            // 結果画面へ
+            Intent intent = new Intent(getApplicationContext(), ClearResultActivity.class);
             intent.putExtra("SCORE", score);
             startActivity(intent);
         }
